@@ -1,0 +1,22 @@
+{
+   //% Restore Terminals
+   "restoreTerminals.runOnStartup": true, // Impostando questo comando di sotto su true si avvieranno questi terminali sotto all'avvio di questa repo.
+   "restoreTerminals.terminals": [
+      {
+         "splitTerminals": [
+            { //$ Terminale disponibile
+               "shouldRunCommands": false,
+               "name": "Terminal",
+            },
+            { //$ Terminale per avviare il server
+               "shouldRunCommands": true, //! I comandi verranno avviati
+               "restoreTerminals.artificialDelayMilliseconds": 1000, //* Ritardo di attivazione terminale
+               "name": "Webpack",
+               "commands": [
+                  "npm start",
+               ]
+            }
+         ]
+      }
+   ]
+}
