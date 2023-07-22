@@ -238,6 +238,56 @@ const ConditionalRendering = () => {
             </ul>
         </>
     )
+
+    //$ Short-circuit evaluation
+    /* return (
+        <>
+            {loading && <Loading />}
+            {error && <Error />}
+            {!loading && !error &&
+                <>
+                    <h2>Dati in arrivo</h2>
+                    <ul>
+                        {posts.map(({ title, body, id }) => {
+                            return (
+                                <li key={id}>
+                                    <h3>Titolo: {title}</h3>
+                                    <p>Descrizione: {body}</p>
+                                    <p>ID: {id}</p>
+                                </li>
+                            )
+                        })}
+                    </ul>
+                </>
+            }
+        </>
+    ) */
+
+
+    //$ Ternary operator
+    /* return (
+        <>
+            {loading ?
+                <Loading /> :
+                error ?
+                    <Error /> :
+                    <>
+                        <h2>Dati in arrivo</h2>
+                        <ul>
+                            {posts.map(({ title, body, id }) => {
+                                return (
+                                    <li key={id}>
+                                        <h3>Titolo: {title}</h3>
+                                        <p>Descrizione: {body}</p>
+                                        <p>ID: {id}</p>
+                                    </li>
+                                )
+                            })}
+                        </ul>
+                    </>
+            }
+        </>
+    ) */
 }
 const Loading = () => {
     return <p>Caricamento…</p>;
@@ -245,9 +295,6 @@ const Loading = () => {
 const Error = () => {
     return <p>Errore nella richiesta: 404.</p>;
 }
-
-
-
 
 
 export default StateEffect;
