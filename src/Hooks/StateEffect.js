@@ -25,6 +25,33 @@ function Counter() {
     );
 }
 
+//% useState come oggetto
+/* function Counter() {
+    const [state, setState] = useState({
+        count: 0,
+        name: 'Counter',
+    });
+    const incrementCount = () => {
+        setState(prevState => ({
+            ...prevState,
+            count: prevState.count + 1
+        }));
+    };
+    return (
+        <div>
+            <p>{state.name} clicked {state.count} times</p>
+            <button onClick={incrementCount}>
+                Click me
+            </button>
+        </div>
+    );
+} */
+
+
+
+
+
+
 //% useEffect()
 /* useEffect(() => {
     // Questo codice viene eseguito dopo ogni rendering
