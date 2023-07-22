@@ -25,6 +25,7 @@ function Counter() {
     );
 }
 
+
 //% useState come oggetto
 /* function Counter() {
     const [state, setState] = useState({
@@ -52,7 +53,7 @@ function Counter() {
 
 
 
-//% useEffect()
+//% Sintassi useEffect()
 /* useEffect(() => {
     // Questo codice viene eseguito dopo ogni rendering
     });
@@ -62,6 +63,8 @@ function Counter() {
     useEffect(() => {
         // Questo codice viene eseguito se count cambia
     }, [count]); // L'effetto si esegue quando il valore di count cambia */
+
+
 
 
 //$ Esempio 1: senza array - Contatore rendering
@@ -116,6 +119,5 @@ function Counter() {
         </div>
     );
 } */
-
 
 export default StateEffect;
