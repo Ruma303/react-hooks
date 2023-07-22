@@ -1,20 +1,21 @@
 import React, { useState, useEffect } from 'react';
-
+import axios from 'axios';
 const StateEffect = () => {
     return (
         <>
             <h1>useState e useEffect</h1>
-            <Counter />
+            {/* <Counter /> */}
             {/* <RenderCounter /> */}
             {/* <Timer /> */}
             {/* <FetchData /> */}
+            <ConditionalRendering />
         </>
     )
 }
 
 
 //% useState()
-function Counter() {
+/* function Counter() {
     const [count, setCount] = useState(0);
     return (
         <div>
@@ -24,7 +25,7 @@ function Counter() {
         </div>
     );
 }
-
+ */
 
 //% useState come oggetto
 /* function Counter() {
@@ -119,5 +120,134 @@ function Counter() {
         </div>
     );
 } */
+
+
+
+//% Altro su useEffect
+//$ Hooks in strutture di controllo
+
+/* if (state.count > 0) {
+    useEffect(() => {
+        document.title = `${state.name} cliccato ${state.count} volte.`;
+    }, [state]);
+} else {
+    document.title = `Contatore mai cliccato.`;
+} */
+
+
+/* function Counter() {
+    const [state, setState] = useState({ count: 0, name: 'Counter' });
+    const [windowHeight, setWindowHeight] = useState(window.innerHeight);
+    const incrementCount = () => {
+        setState(prevState => ({
+            ...prevState,
+            count: prevState.count + 1
+        }));
+    };
+    useEffect(() => {
+        if (state.count > 0) {
+            setState(prevState => ({
+                ...prevState,
+                name: `Counter cliccato ${prevState.count} volte.`,
+            }));
+        } else {
+            setState(prevState => ({
+                ...prevState,
+                name: `Counter non ancora cliccato.`,
+            }))
+        } return () => {
+            console.log('Eseguo la pulizia.');
+        };
+    }, [state.count]); */
+
+/* const funzione2 = () => {
+   console.log("Secondo useEffect.");
+}
+useEffect(funzione2); */
+
+
+/*     useEffect(() => { //$ Cleanup function
+        window.addEventListener('resize', resizing);
+        return () => {
+            window.removeEventListener('resize', resizing);
+        }
+    });
+
+    function resizing() {
+        setWindowHeight(window.innerHeight); // Setta l'altezza della finestra
+    }
+
+    return (
+        <div>
+            <p>{state.name}</p>
+            <button onClick={incrementCount}>
+                Cliccami
+            </button>
+            <p>Altezza finestra: {windowHeight}px.</p>
+        </div>
+    );
+} */
+
+
+//$ Rendering condizionale
+
+const ConditionalRendering = () => {
+    const [posts, setPosts] = useState(null);
+    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const url = 'https://jsonplaceholder.typicode.com/posts';
+
+    const getData = async () => {
+        try {
+            const response = await axios.get(url);
+            if (response.status !== 200) { //* Se la risposta non è ok, lancia un errore.
+                throw new Error(`Errore nella richiesta: ${response.status}`);
+            }
+            const data = response.data; //* Axios mette i dati della risposta nella proprietà data.
+            setPosts(data);
+            setLoading(false);
+        } catch (error) {
+            setError(error.message);
+            setLoading(false);
+        }
+    }
+    useEffect(() => {
+        getData();
+    }, []);
+
+    if (loading) {
+        return <Loading />;
+    }
+
+    if (error) {
+        return <Error />;
+    }
+    return (
+        <>
+            <h2>Dati in arrivo</h2>
+            <ul>
+                {posts.map(({ title, body, id }) => {
+                    return (
+                        <li key={id}>
+                            <h3>Titolo: {title}</h3>
+                            <p>Descrizione: {body}</p>
+                            <p>ID: {id}</p>
+                        </li>
+                    )
+                })}
+            </ul>
+        </>
+    )
+}
+const Loading = () => {
+    return <p>Caricamento…</p>;
+}
+const Error = () => {
+    return <p>Errore nella richiesta: 404.</p>;
+}
+
+
+
+
 
 export default StateEffect;
