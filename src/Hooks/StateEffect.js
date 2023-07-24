@@ -36,7 +36,7 @@ const StateEffect = () => {
     const incrementCount = () => {
         setState(prevState => ({
             ...prevState,
-            count: prevState.count + 1
+            count: prevState.count + 1,
         }));
     };
     return (
@@ -47,8 +47,8 @@ const StateEffect = () => {
             </button>
         </div>
     );
-} */
-
+}
+ */
 
 
 
@@ -132,8 +132,8 @@ const StateEffect = () => {
     }, [state]);
 } else {
     document.title = `Contatore mai cliccato.`;
-} */
-
+}
+ */
 
 /* function Counter() {
     const [state, setState] = useState({ count: 0, name: 'Counter' });
@@ -144,6 +144,7 @@ const StateEffect = () => {
             count: prevState.count + 1
         }));
     };
+
     useEffect(() => {
         if (state.count > 0) {
             setState(prevState => ({
@@ -158,15 +159,9 @@ const StateEffect = () => {
         } return () => {
             console.log('Eseguo la pulizia.');
         };
-    }, [state.count]); */
+    }, [state.count]);
 
-/* const funzione2 = () => {
-   console.log("Secondo useEffect.");
-}
-useEffect(funzione2); */
-
-
-/*     useEffect(() => { //$ Cleanup function
+    useEffect(() => { //$ Cleanup function
         window.addEventListener('resize', resizing);
         return () => {
             window.removeEventListener('resize', resizing);
@@ -186,8 +181,8 @@ useEffect(funzione2); */
             <p>Altezza finestra: {windowHeight}px.</p>
         </div>
     );
-} */
-
+}
+ */
 
 //$ Rendering condizionale
 
@@ -203,6 +198,7 @@ const ConditionalRendering = () => {
             if (response.status !== 200) { //* Se la risposta non è ok, lancia un errore.
                 throw new Error(`Errore nella richiesta: ${response.status}`);
             }
+            console.log(response)
             const data = response.data; //* Axios mette i dati della risposta nella proprietà data.
             setPosts(data);
             setLoading(false);
@@ -215,14 +211,16 @@ const ConditionalRendering = () => {
         getData();
     }, []);
 
-    if (loading) {
+    /* if (loading) {
+        //return <p>Caricamento…</p>;
         return <Loading />;
     }
-
-    if (error) {
+ */
+    /* if (error) {
+        //return <p>Errore nella richiesta: 404.</p>;
         return <Error />;
-    }
-    return (
+    } */
+    /* return (
         <>
             <h2>Dati in arrivo</h2>
             <ul>
@@ -237,34 +235,34 @@ const ConditionalRendering = () => {
                 })}
             </ul>
         </>
-    )
-
-    //$ Short-circuit evaluation
-    /* return (
-        <>
-            {loading && <Loading />}
-            {error && <Error />}
-            {!loading && !error &&
-                <>
-                    <h2>Dati in arrivo</h2>
-                    <ul>
-                        {posts.map(({ title, body, id }) => {
-                            return (
-                                <li key={id}>
-                                    <h3>Titolo: {title}</h3>
-                                    <p>Descrizione: {body}</p>
-                                    <p>ID: {id}</p>
-                                </li>
-                            )
-                        })}
-                    </ul>
-                </>
-            }
-        </>
     ) */
 
+//$ Short-circuit evaluation
+/* return (
+    <>
+        {loading && <Loading />}
+        {error && <Error />}
+        {loading || error ||
+            <>
+                <h2>Dati in arrivo</h2>
+                <ul>
+                    {posts.map(({ title, body, id }) => {
+                        return (
+                            <li key={id}>
+                                <h3>Titolo: {title}</h3>
+                                <p>Descrizione: {body}</p>
+                                <p>ID: {id}</p>
+                            </li>
+                        )
+                    })}
+                </ul>
+            </>
+        }
+    </>
+) */
 
-    //$ Ternary operator
+
+//$ Ternary operator
     /* return (
         <>
             {loading ?
@@ -289,11 +287,12 @@ const ConditionalRendering = () => {
         </>
     ) */
 }
+
 const Loading = () => {
-    return <p>Caricamento…</p>;
+return <p>Caricamento…</p>;
 }
 const Error = () => {
-    return <p>Errore nella richiesta: 404.</p>;
+return <p>Errore nella richiesta: 404.</p>;
 }
 
 
